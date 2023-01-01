@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using Microsoft.MixedReality.Toolkit.UI;
 
-public class patchLiver : MonoBehaviour
+public class enzymevalueslider : MonoBehaviour
 {
+    public GameObject gallBladder;
     public GameObject liver;
-    public int patchdivision ;
-
+    Color[] livercolor;
+    Vector3 scal;
     // Start is called before the first frame update
     void Start()
     {
-        
+        scal = gallBladder.transform.localScale;
+        Debug.Log(scal);
+        livercolor = liver.GetComponent<MeshFilter>().mesh.colors;
     }
 
     // Update is called once per frame
@@ -19,18 +22,34 @@ public class patchLiver : MonoBehaviour
     {
         
     }
-    public void changeColor()
+    public void OnSliderUpdated(SliderEventData eventData)
+    {
+        if (eventData.NewValue != 0)
+        {
+            if (eventData.NewValue > 0.5)
+            {
+                gallBladder.transform.localScale = scal * (1 + eventData.NewValue);
+            }
+            else if (eventData.NewValue < 0.35)
+            {
+                int patchdivision = (int)(100 * (1/eventData.NewValue));
+                patchLiver(patchdivision);
+            }
+            else
+            {
+                liver.GetComponent<MeshFilter>().mesh.colors = livercolor;
+                gallBladder.transform.localScale = scal;
+            }
+        }
+    }
+    void patchLiver(int patchdivision)
     {
         int a = 0;
         Mesh mesh = liver.GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
-        Debug.Log(vertices.Length);
-        // create new colors array where the colors will be created.
         Color[] colors = new Color[vertices.Length];
         System.Random r = new System.Random();
         int rInt = r.Next(1, 2);
-
-
         for (int i = 0; i < vertices.Length; i++)
         {
             a++;
@@ -51,13 +70,13 @@ public class patchLiver : MonoBehaviour
                 rInt = r.Next(1, 2);
                 a = 0;
             }
-            else { 
-            colors[i] = Color.white;//Color.Lerp(Color.red, Color.green, vertices[i].y);
+            else
+            {
+                colors[i] = Color.white;
             }
         }
-        //Debug.Log("Done coloring: "+cpu);
-        // assign the array of colors to the Mesh.
         mesh.colors = colors;
         liver.GetComponent<MeshFilter>().mesh = mesh;
     }
+
 }
