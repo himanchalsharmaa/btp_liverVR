@@ -11,7 +11,7 @@ public class colliderTriangles : MonoBehaviour
     void Start()
     {
         //transform.LookAt(liver.transform);
-        StartCoroutine(calfunc());
+        
 
     }
 
@@ -33,9 +33,8 @@ public class colliderTriangles : MonoBehaviour
             Debug.Log("Nothing");
         }  */
     }
-    IEnumerator calfunc()
+    public void calfunc()
     {
-        yield return new WaitForSeconds(1);
         Mesh mesh = liver.GetComponent<MeshFilter>().mesh;
         Matrix4x4 localToWorld = transform.localToWorldMatrix;
 
@@ -53,7 +52,7 @@ public class colliderTriangles : MonoBehaviour
             }
         }
         liver.GetComponent<MeshFilter>().mesh.colors = colors;
-        yield return null;
+
     }
     bool insideornot(Vector3 point)
     {
