@@ -37,7 +37,7 @@ public class cameramovement : MonoBehaviour
             a *= magnitude;
             float b = Mathf.Abs(leftright.x);
             b *= magnitude;
-            inpurcheck.text = a + ":" + b;
+          //  inpurcheck.text = a + ":" + b;
             if (leftright.y > 0)
             {
                 destination1 = transform.position + a * transform.forward;

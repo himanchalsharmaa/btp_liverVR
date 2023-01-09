@@ -32,7 +32,7 @@ public class enzymevalueslider : MonoBehaviour
             }
             else if (eventData.NewValue < 0.35)
             {
-                int patchdivision = (int)(100 * (1/eventData.NewValue));
+                int patchdivision = (int)(100 * (eventData.NewValue));
                 patchLiver(patchdivision);
             }
             else
