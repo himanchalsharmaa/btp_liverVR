@@ -57,7 +57,7 @@ public class colliderTriangles : MonoBehaviour
     bool insideornot(Vector3 point)
     {
         if ((Mathf.Pow((transform.position.x - point.x),2f) + Mathf.Pow((transform.position.y - point.y), 2f) + Mathf.Pow((transform.position.z - point.z), 2f) - Mathf.Pow(radius, 2)) < 0) {
-            Debug.Log(point);
+            //Debug.Log(point);
             return true; 
         }
         else
